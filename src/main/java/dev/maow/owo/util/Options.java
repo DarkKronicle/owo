@@ -2,6 +2,17 @@ package dev.maow.owo.util;
 
 import java.util.*;
 
+/**
+ * An immutable class that stores instances of different options present in {@link dev.maow.owo.api.OwO}.
+ * <p>
+ * This class is immutable in the way that when an option is changed, a new instance of {@code Options} is created.
+ * <p>
+ * This class also has a default set of options accessible by {@link Options#defaults()}.
+ *
+ * @author Maow
+ * @version %I%
+ * @since 2.0.0
+ */
 public class Options {
     private static Options defaultOptions;
 

@@ -3,11 +3,23 @@ package dev.maow.owo.impl;
 import dev.maow.owo.api.OwO;
 import dev.maow.owo.api.OwOProvider;
 import dev.maow.owo.util.Options;
+import dev.maow.owo.util.OwOFactory;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
+/**
+ * A standard implementation of {@link OwO} provided by {@link OwOFactory}.
+ * <p>
+ * This class should NOT be instantiated directly.
+ * Instances should be created using the {@link OwOFactory#create} method.
+ *
+ * @author Maow
+ * @version %I%
+ * @since 2.0.0
+ */
 public class StandardOwO implements OwO {
     private static final Random RANDOM = new Random();
 
@@ -15,7 +27,9 @@ public class StandardOwO implements OwO {
     private final OwOProvider provider;
 
     public StandardOwO(Options options, OwOProvider provider) {
-        this.options = options;
+        this.options = (options == null)
+                ? Options.defaults()
+                : options;
         this.provider = provider;
     }
 
@@ -60,8 +74,8 @@ public class StandardOwO implements OwO {
     }
 
     @Override
-    public Options getOptions() {
-        return options;
+    public Optional<Options> getOptions() {
+        return Optional.of(options);
     }
 
     @Override
