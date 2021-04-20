@@ -5,9 +5,9 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-group = 'dev.maow'
+group = 'com.github.maowimpl'
 archivesBaseName = 'owo'
-version = '1.0.0'
+version = '2.0.0'
 
 compileJava.options.encoding = 'UTF-8'
 
