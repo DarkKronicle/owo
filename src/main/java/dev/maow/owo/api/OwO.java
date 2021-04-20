@@ -5,7 +5,7 @@ import dev.maow.owo.util.Options;
 import java.util.Optional;
 
 /**
- * Provides plaintext -> owospeak conversion utilities.
+ * Provides plaintext to owospeak conversion utilities.
  * <p>
  * An instance of {@code OwO} is typically initialized by a {@link OwOProvider}
  * and stores an instance of {@link Options}.
