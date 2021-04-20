@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'maven-publish'
+    id 'signing'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -13,4 +15,67 @@ compileJava.options.encoding = 'UTF-8'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+javadoc {
+    failOnError = false
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = 'UTF-8'
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+def isReleaseVersion = !version.endsWith('SNAPSHOT')
+
+publishing {
+    repositories {
+        maven {
+            url = isReleaseVersion
+                    ? 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+                    : 'https://oss.sonatype.org/content/repositories/snapshots/'
+            credentials {
+                username = project.hasProperty('nexusUsername') ? nexusUsername : "UNKNOWN"
+                password = project.hasProperty('nexusPassword') ? nexusPassword : "UNKNOWN"
+            }
+        }
+    }
+
+    publications {
+        mavenJava(MavenPublication) {
+            pom {
+                groupId = 'io.github.maowimpl'
+                name = 'owo'
+                description = 'Advanced Java OwOifier'
+                url = 'https://github.com/MaowImpl/owo/'
+
+                from components.java
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:git@github.com:maowimpl/owo.git'
+                    developerConnection = 'scm:git:git@github.com:maowimpl/owo.git'
+                    url = 'https://github.com/MaowImpl/owo/'
+                }
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
+tasks.withType(Sign) {
+    onlyIf { isReleaseVersion }
 }
