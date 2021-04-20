@@ -54,6 +54,12 @@ publishing {
                     }
                 }
 
+                developers {
+                    developer {
+                        name = 'MaowImpl'
+                    }
+                }
+
                 scm {
                     connection = 'scm:git:git@github.com:maowimpl/owo.git'
                     developerConnection = 'scm:git:git@github.com:maowimpl/owo.git'
